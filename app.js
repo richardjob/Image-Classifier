@@ -68,12 +68,11 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/upload',removeFile,upload.single('image'),(req,res)=>{
-    res.status(200)
-    return res.redirect('/result')
+    return res.redirect(307,'/result')
 })
 
 
-app.get('/result',(req,res)=>{
+app.post('/result',(req,res)=>{
     res.setHeader('content-type','text/html')
     res.status(302)
     res.sendFile(__dirname+'/public/result.html')
