@@ -1,58 +1,77 @@
-
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="result.css">
-  </head>
-  <body>
 
-    <div style="text-align: center;">
-      <img id="img" src="image.jpg" width="60%" height="70%">
-    </div>
-    
-    <h1 style="text-align: center;" id="result"></h1>
+<head>
+  <script src="tf.min.js"></script>
+  <script src="mobilenet.js"></script>
 
-    <div style="text-align: center;">
-      <button onclick="location.href='index.html'" >Check Another Image</button>
-    </div>
-    
+  <style>
 
-<!-- Load TensorFlow.js. This is required to use MobileNet. -->
-<script src="tf.min.js"></script>
-<!-- Load the MobileNet model. -->
-<script src="mobilenet.js"></script>
+    body {
+      background: #ecf1f4
+    }
 
-<script>
-  const img = document.getElementById('img');
-  const version = 2;
-  const alpha = 0.5;
+    button{
+      padding: 10px;
+    }
 
-  async function run() {
-    // Load the model.
-    const model = await mobilenet.load({version, alpha});
+    button:hover{
+      background-color: #bac675;
+    }
 
-    // Classify the image.
-    const predictions = await model.classify(img);
-    console.log('Predictions');
-    console.log(predictions);
+    div {
+      text-align: center;
+    }
 
-    document.getElementById('result').innerHTML = predictions[0].className
-    
+    p{
+      text-align: center;
+      font-size: xx-large;
+    }
 
-    // Get the logits.
-    // const logits = model.infer(img);
-    // console.log('Logits');
-    // logits.print(true);
 
-    // Get the embedding.
-    // const embedding = model.infer(img, true);
-    // console.log('Embedding');
-    // embedding.print(true);
-  }
-  run();
+  </style>
+
+</head>
+
+<body>
+
+  <div>
+    <img id="img" src="image.jpg" width="60%" height="70%">
+  </div>
+  <p id="result"></p>
+  <div>
+    <button onclick="location.href='index.html'">Upload Another Image</button>
+  </div>
+
+  <script>
+    const img = document.getElementById('img');
+    const version = 2;
+    const alpha = 0.5;
+
+    async function run() {
+      // Load the model.
+      const model = await mobilenet.load({ version, alpha });
+
+      // Classify the image.
+      const predictions = await model.classify(img);
+      console.log('Predictions');
+      console.log(predictions);
+
+      document.getElementById('result').innerHTML = "Prediction: " + predictions[0].className
+
+
+      // Get the logits.
+      // const logits = model.infer(img);
+      // console.log('Logits');
+      // logits.print(true);
+
+      // Get the embedding.
+      // const embedding = model.infer(img, true);
+      // console.log('Embedding');
+      // embedding.print(true);
+    }
+    run();
   </script>
 
-  </body>
+</body>
+
 </html>
-
-
-

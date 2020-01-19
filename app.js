@@ -30,6 +30,36 @@ const removeFile = (req,res,next)=>{
 
         }
     })
+    fs.exists('./public/image.png',function(exists) {
+        if(!exists) next()
+        else{
+            fs.unlink('./public/image.png',function (err) {
+                if(err) throw err
+                else next()
+            })
+
+        }
+    })
+    fs.exists('./public/image.jpeg',function(exists) {
+        if(!exists) next()
+        else{
+            fs.unlink('./public/image.jpeg',function (err) {
+                if(err) throw err
+                else next()
+            })
+
+        }
+    })
+    fs.exists('./public/image.pdf',function(exists) {
+        if(!exists) next()
+        else{
+            fs.unlink('./public/image.pdf',function (err) {
+                if(err) throw err
+                else next()
+            })
+
+        }
+    })
 }
 
 app.use(logger('dev'))
