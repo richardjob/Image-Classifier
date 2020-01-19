@@ -67,8 +67,12 @@ app.use(logger('dev'))
 app.get('/',(req,res)=>{
 })
 
+app.post('/upload',removeFile,upload.single('image'),(req,res)=>{
+    res.redirect('/result')
+})
 
-app.post('/result',removeFile,upload.single('image'),(req,res)=>{
+
+app.post('/result',(req,res)=>{
     res.sendFile(__dirname+'/public/result.html')
 })
 
