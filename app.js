@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 const http = require('http')
+const logger = require('morgan')
+const PORT = process.env.PORT || 8000
 
 const express = require('express')
 const app = express()
@@ -30,6 +32,8 @@ const removeFile = (req,res,next)=>{
     })
 }
 
+app.use(logger('dev'))
+
 app.get('/',(req,res)=>{
 })
 
@@ -42,4 +46,4 @@ app.get('/result',(req,res)=>{
     res.sendFile(__dirname+'/public/result.html')
 })
 
-http.createServer(app).listen(8000,()=>console.log("Listening on Port 8000"))
+http.createServer(app).listen(PORT,()=>console.log(`Listening on Port ${PORT}`))
