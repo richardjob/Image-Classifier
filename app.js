@@ -65,14 +65,15 @@ const removeFile = (req,res,next)=>{
 app.use(logger('dev'))
 
 app.get('/',(req,res)=>{
+    res.status(200)
 })
 
 app.post('/upload',removeFile,upload.single('image'),(req,res)=>{
-    return res.redirect(307,'/result')
+    return res.redirect('/result')
 })
 
 
-app.post('/result',(req,res)=>{
+app.get('/result',(req,res)=>{
     res.setHeader('content-type','text/html')
     res.status(302)
     res.sendFile(__dirname+'/public/result.html')
