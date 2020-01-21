@@ -69,7 +69,8 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/upload',removeFile,upload.single('image'),(req,res)=>{
-    return res.redirect('/result')
+    res.statusCode = 302
+    res.redirect('/result')
 })
 
 
